@@ -9,8 +9,8 @@ import LeftAccordions from '../components/LeftAccordion';
 import Tweet from '../components/Tweet/Tweet';
 import AddTweet from '../components/AddTweet/AddTweet';
 import SideBar from '../components/SideBar';
-import { fetchTweets, selectTweets, tweet } from '../components/Redux/Slices/TweetSlice';
-import { useAppDispatch } from '../components/Redux/store';
+import { fetchTweets, selectTweets, tweet } from '../Redux/Slices/TweetSlice';
+import { useAppDispatch } from '../Redux/store';
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();

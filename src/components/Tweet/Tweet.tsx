@@ -4,8 +4,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Avatar from '@mui/material/Avatar';
 import { Typography, Paper } from '@mui/material';
 import TweetFooter from './TweetFooter';
-import { selectTweetById } from '../Redux/Slices/TweetSlice';
-import { useAppSelector } from '../Redux/store';
+import { selectTweetById } from '../../Redux/Slices/TweetSlice';
+import { useAppSelector } from '../../Redux/store';
 
 const Tweet: React.FC<{ id: string }> = ({ id }) => {
   const tweet = useAppSelector(selectTweetById(id));
