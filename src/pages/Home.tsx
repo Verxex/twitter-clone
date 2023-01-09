@@ -1,25 +1,28 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import NavMenu from '../components/NavMenu';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+
+import { Grid, CssBaseline, Box, Container } from '@mui/material';
+import { useSelector } from 'react-redux';
+
 import SearchFild from '../components/SearchFild';
 import MainHeader from '../components/MainHeader';
-import TwitsList from '../components/TwitsList';
 import LeftAccordions from '../components/LeftAccordion';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(0),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+import Tweet from '../components/Tweet/Tweet';
+import AddTweet from '../components/AddTweet/AddTweet';
+import SideBar from '../components/SideBar';
+import { fetchTweets, selectTweets, tweet } from '../components/Redux/Slices/TweetSlice';
+import { useAppDispatch } from '../components/Redux/store';
 
 const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const isMounted = React.useRef(false);
+  React.useEffect(() => {
+    if (isMounted.current) {
+      dispatch(fetchTweets());
+    }
+    isMounted.current = true;
+  }, []);
+
+  const tweets = useSelector(selectTweets) as tweet[];
   return (
     <React.Fragment>
       <CssBaseline />
@@ -31,19 +34,24 @@ const Home: React.FC = () => {
             <Grid
               item
               xs={3}>
-              <NavMenu />
+              <SideBar />
             </Grid>
             <Grid
               sx={{
-                '--Grid-borderWidth': '1px',
-                borderRight: 'var(--Grid-borderWidth) solid',
-                borderBottom: 'var(--Grid-borderWidth) solid',
+                borderRight: '1px solid',
+                borderBottom: '1px solid',
                 borderColor: 'divider',
               }}
               item
               xs={6}>
               <MainHeader />
-              <TwitsList />
+              <AddTweet />
+              {tweets.map((obj) => (
+                <Tweet
+                  key={obj.id}
+                  id={obj.id}
+                />
+              ))}
             </Grid>
             <Grid
               item
