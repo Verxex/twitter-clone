@@ -3,18 +3,10 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Avatar from '@mui/material/Avatar';
-import { Typography, Paper, InputBase, Stack } from '@mui/material';
+import { Typography, Paper, TextareaAutosize, Stack } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import AddTweetFooter from './AddTweetFooter';
 import PublicIcon from '@mui/icons-material/PublicOutlined';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 export default function AddTweet() {
   const user = {
@@ -38,10 +30,10 @@ export default function AddTweet() {
           />
         </Grid>
         <Grid xs={11}>
-          <InputBase
-            sx={{ ml: 1, flex: 1, fontWeight: 600 }}
+          <TextareaAutosize
+            style={{ fontWeight: 600, fontSize: 20, width: '100%', border: 'none' }}
             placeholder="Что происходит?"
-            inputProps={{ 'aria-label': 'search google maps' }}
+            maxRows={6}
           />
           <Stack
             direction="row"
@@ -56,7 +48,6 @@ export default function AddTweet() {
               Отвечать могут все пользователи
             </Typography>
           </Stack>
-
           <Divider />
           <AddTweetFooter />
         </Grid>
