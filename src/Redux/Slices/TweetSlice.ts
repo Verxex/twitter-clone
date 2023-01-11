@@ -27,7 +27,7 @@ const initialState: TweetSliceState = {
 
 // First, create the thunk
 export const fetchTweets = createAsyncThunk<tweet[]>('tweets/fetchTweets', async () => {
-  const { data } = await axios.get<tweet[]>('https://63ba8fd056043ab3c79e406c.mockapi.io/tweets');
+  const { data } = await axios.get<tweet[]>('/tweets');
   return data;
 });
 
@@ -43,7 +43,6 @@ export const tweetSlice = createSlice({
     },
   },
   extraReducers: (tweetsBuilder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
     tweetsBuilder.addCase(fetchTweets.pending, (state) => {
       state.loadingStatus = 'loading';
       state.items = [];

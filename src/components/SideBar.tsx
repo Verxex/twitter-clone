@@ -14,8 +14,14 @@ import MoreIcon from '@mui/icons-material/MoreHorizOutlined';
 import UserIcon from '@mui/icons-material/Person3Outlined';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
+import PopUp from './PopUp';
+import AddTweet from './AddTweet/AddTweet';
 
 const SideBar: React.FC = () => {
+  const [popupOpen, setPopupOpen] = React.useState(false);
+  const handleClose = () => {
+    setPopupOpen(false);
+  };
   const paperSX = {
     height: '100vh',
     display: 'flex',
@@ -26,23 +32,7 @@ const SideBar: React.FC = () => {
     marginBottom: 5,
     marginLeft: 5,
   };
-  const twittButtonSx = {
-    justifyContent: 'center',
-  };
-  const TitleSx = {
-    fontWeight: 600,
-    color: '#fff',
-    '& :hover': {
-      color: 'rgb(29,161,242)',
-    },
-  };
-  const itemSx = {
-    margin: 2,
-    borderRadius: 5,
-    textAlign: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgb(29,161,242)',
-  };
+
   return (
     <Paper sx={paperSX}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -103,11 +93,17 @@ const SideBar: React.FC = () => {
           </SideBarItem>
         </MenuList>
         <Button
+          onClick={() => setPopupOpen(!popupOpen)}
           sx={{ width: 210 }}
           variant="contained"
           color="primary">
           Твитнуть
         </Button>
+        <PopUp
+          popupOpen={popupOpen}
+          handleClose={handleClose}>
+          <AddTweet />
+        </PopUp>
       </Box>
       <UserIcon
         sx={userIconSX}
